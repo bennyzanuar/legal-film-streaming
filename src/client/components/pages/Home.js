@@ -4,10 +4,11 @@ import Navbar from '../partial/Navbar'
 import BigTitle from '../partial/BigTitle'
 import Footer from '../partial/Footer'
 import Pagination from '../partial/Pagination'
+import HomePlaceholder from '../box/HomePlaceholder'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchAPI } from '../../actions'
+import { fetchAPI, buyMovie } from '../../actions'
 import { imageConf } from '../../configs'
 
 import qs from 'qs'
@@ -32,6 +33,7 @@ class Home extends Component {
     getPurchasedMovie(){
         let purchased_movie = localStorage.getItem('purchased_movie')
         purchased_movie = JSON.parse(purchased_movie)
+        this.props.buyMovie(purchased_movie, true)
     }
     componentDidMount() {
         let querystring = qs.parse(this.props.location.search, { ignoreQueryPrefix: true })
@@ -43,10 +45,18 @@ class Home extends Component {
         this.getPurchasedMovie()
 	}
     
+    componentDidUpdate(prevProps) {
+        if (this.props.location.search !== prevProps.location.search) {
+            let querystring = qs.parse(this.props.location.search, { ignoreQueryPrefix: true })
+            let page = querystring.page
+            params.page = page
+            this.props.fetchAPI(STORE_PATH_NP, endpoint_np, params)
+        }
+    }
     render() {
-        const { now_playing } = this.props
-        
-        console.log('udah ada belum ? ',purchased_movie);
+        const { now_playing, purchased_movie } = this.props
+
+        // console.log('now_playing? ',now_playing);
         let page = params.page
         return(
             <>
@@ -56,9 +66,11 @@ class Home extends Component {
                         <BigTitle />
                         <div className="container">
                             <div className="row">
-                                { typeof now_playing == 'undefined' || now_playing.isFetching == true && <div>Lagi Loading Bosku</div> }
+                                { typeof now_playing == 'undefined' || now_playing.isFetching == true && 
+                                    <HomePlaceholder count='8' />
+                                }
                                 { typeof now_playing != 'undefined' && now_playing.isFetching == false &&
-                                    <MovieList movies={now_playing.data.results} />
+                                    <MovieList movies={now_playing.data.results} buyMovie={this.props.buyMovie} purchasedMovie={purchased_movie}/>
                                 }
                             </div>
                             <div className="row">
@@ -79,15 +91,15 @@ class Home extends Component {
 }
 
 function mapStateToProps(state){
-    console.log('mapStateToProps buuyyyyy',state.buy.idMovie);
     return { 
-        now_playing : state.search[STORE_PATH_NP]
+        now_playing : state.search[STORE_PATH_NP], 
+        purchased_movie : state.buy.idMovie
     }
 }
 
 function mapDispatchToProps(dispatch){
     return bindActionCreators(
-        { fetchAPI }, dispatch
+        { fetchAPI, buyMovie }, dispatch
     )
 }
 
