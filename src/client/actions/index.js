@@ -45,7 +45,9 @@ export const fetchAPI = (storePath, endpoint, params) => async(dispatch, getStat
                 storePath, 
                 data : res.data
             })
-        )
+        ).catch(rer => {
+
+        })
     }
 }
 

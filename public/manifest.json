@@ -1,5 +1,5 @@
 {
-    "short_name": "",
+    "short_name": "filmstream",
     "name": "Legal film streaming",
     "description": "Legal film streaming App built with react redux server side rendering",
     "display": "standalone",
