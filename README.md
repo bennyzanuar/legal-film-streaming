@@ -1,5 +1,7 @@
 # legal-film-streaming
 
+Live demo : http://toko-flix-film.herokuapp.com/
+
 Dibuat dengan
 - React
 - Redux
