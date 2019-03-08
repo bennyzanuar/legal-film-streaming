@@ -1,8 +1,8 @@
 version: '3.5'
 services:
     server:
-        image: "xceng"
-        container_name: "xceng_server"
+        image: "legalfilm"
+        container_name: "legalfilm_server"
         build:
             context: .
             dockerfile: Dockerfile
@@ -17,8 +17,8 @@ services:
              
 
     client:
-        image: "xceng"
-        container_name: "xceng_client"
+        image: "legalfilm"
+        container_name: "legalfilm_client"
         build:
             context: .
             dockerfile: Dockerfile

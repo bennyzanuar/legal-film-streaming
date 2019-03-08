@@ -8,25 +8,23 @@ export const REQUEST = 'fetch/REQUEST';
 export const SUCCESS = 'fetch/SUCCESS';
 export const ERROR = 'fetch/ERROR';
 
-export const fetchAPI = (storePath, endpoint, params) => (dispatch, getState, api) => {
+export const fetchAPI = (storePath, endpoint, params) => async(dispatch, getState, api) => {
     let stringParams = qs.stringify(params)
     dispatch({ type: REQUEST, storePath, data : null })
-    api.get(`/${apiVersion}/${endpoint}?api_key=${apiKey}&${stringParams}`)
-    .then((res) => {
+    try {
+        let res = await api.get(`/${apiVersion}/${endpoint}?api_key=${apiKey}&${stringParams}`)
         dispatch({ 
             type: SUCCESS, 
             storePath, 
             data : res.data
         })
-    }).catch(err => {
+    } catch (e) {
         dispatch({ 
             type: ERROR, 
             storePath,
             data : 'error bro'
         })
-    })
-        
-    
+    }
 }
 
 export const buyMovie = (id, initialLoad) => {
