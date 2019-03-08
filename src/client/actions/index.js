@@ -8,6 +8,25 @@ export const REQUEST = 'fetch/REQUEST';
 export const SUCCESS = 'fetch/SUCCESS';
 export const ERROR = 'fetch/ERROR';
 
+function tryGetDataCache(url) {
+    return new Promise((resolve, reject) => {
+        if(typeof window !== 'undefined' && 'caches' in window) {
+            return caches.match(url)
+            .then(function(matchedResponse) {
+                if (!matchedResponse) {
+                    reject()
+                    return
+                }
+                resolve(matchedResponse.json())
+            })
+            .catch(e => {
+                reject()
+            })
+        }
+        reject()
+    })
+}
+
 export const fetchAPI = (storePath, endpoint, params) => async(dispatch, getState, api) => {
     let stringParams = qs.stringify(params)
     dispatch({ type: REQUEST, storePath, data : null })
@@ -19,11 +38,14 @@ export const fetchAPI = (storePath, endpoint, params) => async(dispatch, getStat
             data : res.data
         })
     } catch (e) {
-        dispatch({ 
-            type: ERROR, 
-            storePath,
-            data : 'error bro'
-        })
+        tryGetDataCache(`/${apiVersion}/${endpoint}?api_key=${apiKey}&${stringParams}`)
+        .then(response => 
+            dispatch({ 
+                type: SUCCESS, 
+                storePath, 
+                data : res.data
+            })
+        )
     }
 }
 

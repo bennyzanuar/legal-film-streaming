@@ -27,4 +27,4 @@ ReactDOM.hydrate(
     document.querySelector('#root')
 )
 
-// serviceWorker.register()
+serviceWorker.register()

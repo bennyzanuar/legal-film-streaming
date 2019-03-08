@@ -14,7 +14,7 @@ class Meta extends Component {
         }
         return (
             <Helmet>
-                <title>{meta.title}s</title>
+                <title>{meta.title}</title>
                 <meta name="description" content={meta.overview} itemprop="description"/>
                 <meta name="keywords" content itemprop={`tokopedia, legal film, react, redux, express, nodejs, server side rendering, ${meta.title}`} />
             </Helmet>
