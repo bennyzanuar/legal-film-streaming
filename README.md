@@ -6,13 +6,17 @@ Dibuat dengan
 - Webpack
 - Server side rendering
 - Progressive web apps
-- Fitur loading konten 
-- Fitur image rendering dengan merender image kecil terlebih dahulu
-- Fitur meta tag
+
+Fitur 
+- Loading konten 
+- Image rendering dengan merender image kecil terlebih dahulu
+- Meta tag
+- Rating tiap 1 page berisi 20 movie
 - Handle image broken
 
 Kenapa membuat dengan server side rendering ?\
 karna menurut saya seorang front end engineer juga harus memberi perhatian terhadap SEO
+
 
 ### Instalasi
 NPM dan Node yang digunakan saat membuat web ini\
