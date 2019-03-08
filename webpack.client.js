@@ -1,7 +1,8 @@
 const path = require('path');
 const webpack = require("webpack");
 const merge = require("webpack-merge");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
+
 const baseConfig = require('./webpack.base.js')
 
 const config = {
@@ -13,7 +14,7 @@ const config = {
     },
     optimization: {
         minimizer: [
-            new UglifyJsPlugin({
+            new TerserPlugin({
                 cache: true,
                 parallel: true,
                 sourceMap: true
