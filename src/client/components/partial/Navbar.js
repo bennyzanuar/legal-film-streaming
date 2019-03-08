@@ -8,7 +8,7 @@ class Navbar extends Component {
         let duit = typeof current_money.amount == 'undefined' ? 0 : current_money.amount
         // console.log(current_money);
         return (
-            <header className="header header-fixed header-transparent text-white">
+            <header className="header header-fixed">
                 <div className="container-fluid">
                     <nav className="navbar navbar-expand-lg">
                         <Link className="navbar-brand" to="/">
