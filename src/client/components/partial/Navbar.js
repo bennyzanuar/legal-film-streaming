@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { formatCurrency } from '../../helpers'
 
 class Navbar extends Component {
     render() {
+        const { current_money } = this.props
+        let duit = typeof current_money.amount == 'undefined' ? 0 : current_money.amount
+        // console.log(current_money);
         return (
             <header className="header header-fixed header-transparent text-white">
                 <div className="container-fluid">
@@ -21,15 +25,13 @@ class Navbar extends Component {
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/">Home</Link>
                                 </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/">Contact us</Link>
-                                </li>
                             </ul>
                             <ul className="navbar-nav extra-nav">
                                 <li className="nav-item">
-                                    <Link className="nav-link toggle-search" to="#">
-                                        Rp. AMOUNT
-                                    </Link>
+                                {
+                                    typeof current_money !== 'undefined' &&
+                                    <Link className="nav-link toggle-search" to="#">{formatCurrency(duit)}</Link>
+                                }
                                 </li>
                             </ul>
                         </div>

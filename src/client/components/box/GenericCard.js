@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import MovieCard from '../partial/MovieCard'
 
-class Recommendation extends Component {
+class GenericCard extends Component {
 
     render(){
-        const { data } = this.props
+        const { data, title, styleClass } = this.props
 
         const dataItem = []
         
@@ -14,11 +14,11 @@ class Recommendation extends Component {
         }
         
         return(
-            <section className="recommended-movies bg-light ptb30">
+            <section className={`recommended-movies ${styleClass} ptb30 `}>
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
-                            <h3 className="title">Recommendations</h3>
+                            <h3 className="title">{title}</h3>
                         </div>
                     </div>
                     <div className="row">
@@ -30,4 +30,4 @@ class Recommendation extends Component {
     }
 }
 
-export default Recommendation
+export default GenericCard

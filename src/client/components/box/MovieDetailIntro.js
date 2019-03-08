@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { toast } from 'react-toastify'
 import ImageHelper from '../partial/ImageHelper'
 import Rating from '../partial/Rating'
 import { parseGenre, formatCurrency, formatDate, getPrice } from '../../helpers'
@@ -7,9 +8,18 @@ class MovieDetailIntro extends Component {
     constructor(props) {
         super(props);
     }
-    buy(id) {
-        const { buyMovie } = this.props
-        buyMovie(id, false)
+    buy(id, price) {
+        const { buyMovie, saldo, currentMoney } = this.props
+        let money = currentMoney.amount - price
+
+        if (currentMoney.amount < price) {
+            toast.error("Maaf saldo anda tidak mencukupi untuk melakukan pembelian ini", {
+                position: toast.POSITION.TOP_LEFT
+            });
+        }else {
+            buyMovie(id, false)
+            saldo(money)
+        }
     }
     render() {
         const { data, purchasedMovie } = this.props
@@ -40,7 +50,7 @@ class MovieDetailIntro extends Component {
                                     <li>{formatDate(data.release_date)}</li>
                                 </ul>
                                 <p>{formatCurrency(getPrice(data.vote_average))}</p>
-                                <button onClick={ (e) => {this.buy(data.id)} } className="btn btn-main btn-effect">Buy</button>&nbsp;
+                                <button onClick={ (e) => {this.buy(data.id, getPrice(data.vote_average))} } className="btn btn-main btn-effect">Buy</button>&nbsp;
                                 <Rating average={data.vote_average} />
                             </div>
                             <div className="clearfix"></div>

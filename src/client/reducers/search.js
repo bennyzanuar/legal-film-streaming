@@ -1,14 +1,18 @@
 import { REQUEST, SUCCESS, ERROR } from '../actions';
 
-export default function(state = { }, action={}) {
-    const { storePath, data } = action;
+const initialState = {
+    isFetching: true,
+    data: [],
+    error: null
+};
 
+export default function(state = initialState, action={}) {
+    const { storePath, data } = action;
     switch (action.type) {
         case REQUEST:
             return {
                 ...state,
                 [storePath]: {
-                    ...state[storePath],
                     isFetching: true,
                     data: null
                 }
@@ -31,6 +35,7 @@ export default function(state = { }, action={}) {
                     data: 'error'
                 }
             }
+        
         default:
           return state;
     }

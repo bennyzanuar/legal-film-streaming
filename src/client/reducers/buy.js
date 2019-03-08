@@ -17,9 +17,7 @@ export default (state = currentState, action={}) => {
                     newState.idMovie = newState.idMovie.concat([movieId])
                 }
             }
-            // let newState = {...state};
 
-            console.log('dari reducer bos',newState);
             return newState
         default:
             return state
