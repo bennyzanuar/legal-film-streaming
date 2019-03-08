@@ -11,7 +11,8 @@
     "prod": "npm run prod:build-server && npm run prod:build-client && npm run prod:server",
     "prod:server": "pm2-runtime build/bundle.js",
     "prod:build-server": "webpack --mode production --config webpack.server.js",
-    "prod:build-client": "webpack --mode production --config webpack.client.js"
+    "prod:build-client": "webpack --mode production --config webpack.client.js",
+    "prod-local": "npm run prod:build-server && npm run prod:build-client && node build/bundle.js"
   },
   "repository": {
     "type": "git",
