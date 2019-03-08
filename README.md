@@ -30,6 +30,7 @@ dan jalan kan via terminal seperti berikut
 ```sh
 $ docker-compose up
 ```
+tunggu sampai muncul info diterminal "Listening on port 5000"\
 open in browser http://localhost:5000
 
 Jika tidak ingin install docker, bisa dengan alternatif dibawah ini
@@ -42,4 +43,5 @@ dan jalan kan via terminal seperti berikut
 ```sh
 $ npm run prod-local
 ```
+tunggu sampai muncul info diterminal "Listening on port 5000"\
 open in browser http://localhost:5000
